@@ -1,0 +1,41 @@
+<script type="text/javascript">
+	setTimeout(function(){
+	window.location.reload();
+ }, 15*60000);
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.1/moment-with-locales.js"></script>
+    <script>moment.locale('fr');</script>
+	<script src="done.js"></script>
+	<link href="css/style.css" rel="stylesheet">
+	<title>Sudouest.fr - Signal Gaz</title>
+</head>
+<body>
+	<!-- <input id="loc" type="text" value="Illats,fr"></br></br>
+	<input type="button" value="APPEL API METEO" onclick="buttonClickGET()"> -->
+	<!-- <h1>Les prévisions Ecogaz</br>pour les cinq jours à venir</h1>
+	<hr> -->
+	<div class="flex boxLegend">
+		<div class="flex">
+			<div class="pastille hvalue1"></div>
+			<p class="legend">Consommation tenable</p>
+		</div>
+		<div class="flex">
+			<div class="pastille hvalue2"></div>
+			<div class="legend">Système électrique tendu, écogestes bienvenus</div>
+		</div>
+		<div class="flex">
+			<div class="pastille hvalue3"></div>
+			<div class="legend">Système très tendu, coupures inévitables sans baisse de la consommation</div>
+		</div>
+	</div>
+	<div id="contain"></div>
+	<legend class="source">Source : <a href="https://www.monecowatt.fr/">Ecowatt</a></legend>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,900');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+  	background-color: #ffffff;
+}
+h4{
+    margin: 0px;
+    font-size: 2em;
+}
+h5{
+    font-size: 1.5em;
+    margin: 15px auto;
+}
+hr{
+    border-style: dotted;
+    width: 280px;
+}
+table, td {
+    border:1px solid black;
+  }
+tr{
+height: 20px;
+}
+mark{
+    background-color: black;
+    font-size: 0.8em;
+    color: #ffffff;
+    padding: 2px;
+}
+#contain{
+    margin-top: 10px;
+}
+.cartouche{
+    width: 319px;
+    margin: 5px auto;
+    text-align: left;
+    padding: 8px;
+    background-color: #eee9e9a6;
+    border-radius: 5px 5px 0px 0px;
+    margin-top: 20px;
+}
+.espace{
+    margin: 0px 1px 0px 1px;
+}
+.horizon{
+    display: flex;
+    justify-content: center;
+}
+.box{
+    width: 13px;
+    height: 18px;
+    line-height: 30px;
+}
+.colorVert,colorJaune,colorOrange,colorRouge {
+    color: #ffffff;
+}
+.hvalue1{
+    background-color: #4caf50;
+}
+.hvalue2{
+    background-color: #df9800;
+}
+.hvalue3{
+    background-color: #bc1919;
+}
+.infos{
+    font-size: 1.1em;
+    margin-top: 0px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+}
+.pastille{
+    width: 15px;
+    height: 15px;
+    margin: 0px 5px 0px 8px;
+}
+.legend, hour{
+    font-size: 0.9em;
+    font-style: italic;
+    width: 300px;
+    margin: 4px 0px 4px 0px;
+}
+.source{
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 10px 0px 0px 0px;
+}
+.boxLegend{
+    width: 340px;
+    margin: 0px auto;
+}
+.hour{
+    position: relative;
+    left: -10px;
+    font-size: 0.8em;
+}
+
