@@ -92,9 +92,9 @@ const hour = new Date().getHours();
 			}
 		}
 	
-var callBackSuccess = function(data) {
-	console.log("données api", data)
-	// data.sort(SortTime);
+var callBackSuccess = function(datareturn) {
+	data = datareturn; // SUPERCHICK
+	//data = JSON.parse(datareturn); //INFOGRAOHIE.SUDOUEST.COM
 	
 	var element = document.getElementById('contain');
 	var elementss = document.getElementsByClassName('xx');
@@ -108,34 +108,33 @@ var callBackSuccess = function(data) {
 	
 	element.innerHTML += 
 	"<h5 id='state'></h5>"+
-	"<mark class=''>Dernière mise à jour : "+deleteLastCharH((moment(data[0].GenerationFichier).calendar()).replace(":", "h"))+"</mark>";
+	"<mark class=''>Dernière mise à jour : "+deleteLastCharH((moment(data.signals[0].GenerationFichier).calendar()).replace(":", "h"))+"</mark>";
+	//"<mark class=''>Dernière mise à jour : "+deleteLastCharH((moment(data.signals[0].GenerationFichier).calendar()).replace(":", "h"))+"</mark>";
 	
 	var state = document.getElementById('state');
-	console.log(state);
-	for (n = 0; n < (data[0].values).length; n++) {
-		if (hour == data[0].values[n].pas) {
-			state.innerHTML += "&#192; "+hour+"h, "+infoState(data[0].values[n].hvalue);
-			console.log(data[0].values[n].hvalue)	
+	for (n = 0; n < (data.signals[0].values).length; n++) {
+		if (hour == data.signals[0].values[n].pas) {
+			state.innerHTML += "&#192; "+hour+"h, "+infoState(data.signals[0].values[n].hvalue);
 		}
 	}
 
-	for (i = 0; i < data.length; i++) {
+	for (i = 0; i < data.signals.length; i++) {
 		// console.log((data[i].values).length)
 		element.innerHTML += 
 		"<div id="+i+" class='cartouche color'><h4>"+
-		deleteLastChar(moment(data[i].jour).format('ll'))+
-		"</h4>"+data[i].message+"</div>"+
+		deleteLastChar(moment(data.signals[i].jour).format('ll'))+
+		"</h4>"+data.signals[i].message+"</div>"+
 		"<div>"+
 			"<div id='txt"+[i]+"'>"+
 				"<div id='score"+[i]+"' class='horizon'>";
 		
-		for (n = 0; n < (data[i].values).length; n++) {
+		for (n = 0; n < (data.signals[i].values).length; n++) {
 			var elements = document.getElementById('score'+[i]+'');
 			// console.log(data.values.length)
 			elements.innerHTML +=  
 				"<div style='width: 14px;'>"+
-					"<div class='box espace hvalue"+data[i].values[n].hvalue+"'></div>"+
-					"<div class='hour'>"+remplaceLegend(data[i].values[n].pas)+"</div>"+
+					"<div class='box espace hvalue"+data.signals[i].values[n].hvalue+"'></div>"+
+					"<div class='hour'>"+remplaceLegend(data.signals[i].values[n].pas)+"</div>"+
 				"</div>";	
 		}
 	}
@@ -149,7 +148,7 @@ var callBackSuccess = function(data) {
 window.onload = buttonClickGET();
   
 function buttonClickGET(){
-	var url = 'datas/datas.json';
+	var url = './datas/datas.json';
 	$.get(url, callBackSuccess).done(function() {
 		})
 		.fail(function() {
