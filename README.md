@@ -1,6 +1,7 @@
 # EcoWatt
 Flux - Permet de visualiser l'état du réseau électrique à 5 jours, heure par heure en France via flux json (RTE)</br>
 Descripptif de l'état du réseau heure par heure</br>
+Le dépôt des datas se font à 00h30 et à 11h30</br>
 Url :</br>
 https://infographie.sudouest.fr/EcoWatt/index.html</br>
 https://superchick.fr/EcoWatt/index.html</br></br>
