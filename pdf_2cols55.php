@@ -1,4 +1,6 @@
 <?php
+include (dirname(__FILE__).'/includes/date.php');
+include (dirname(__FILE__).'/includes/tools.php');
 $file = 'datas/datas.json'; 
 // mettre le contenu du fichier dans une variable
 $data = file_get_contents($file); 
@@ -165,7 +167,23 @@ $border=0;
 		}
 	};
 
-
+/**
+ * Met en valeur 'Aujourd'hui'
+ *
+ * @param [int] $x -> J1
+ * @return void
+ */
+	function miseEnValeur($x){
+		if ($x == 1) {
+			$x = 'B';
+			return $x;
+		}
+		else{
+			$x = '';
+			return $x;
+		}
+	};
+	
 $pdf->ImageSVG('images/FondEcoWatt_2cols.svg',0,0,96,55,'','','', 0,false);
 
 $titre = "La météo de l'électricité avec EcoWatt";
@@ -181,7 +199,7 @@ $pdf->SetXY(0,0);
 $pdf->Cell(95,'',$titre,$borderTitre, 0, 'C', 0, '', 1, false, '', 'T');
 
 setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-$maj = 'Mise à jour hier à '.ucfirst(strftime('%R',strtotime($obj->signals[1]->GenerationFichier)));
+$maj = 'Mise à jour hier à '.replaceHMaj(ucfirst(strftime('%R',strtotime($obj->signals[1]->GenerationFichier))));
 // echo $maj."</br>";
 $borderMaj = 0;
 $pdf->SetTextColor(0,0,0,0);
@@ -233,8 +251,8 @@ function afficheIndicateur($posX,$posY,$numDay,$pdf){
 			$borderC = 0;
 				$pdf->SetTextColor(0,0,0,100);
 				$pdf->setCellPaddings(0,0,0,0);
-				$pdf->SetFont('arial','', 9);
-				$pdf->SetXY($posX+4,$posY-3.8);
+				$pdf->SetFont('arial',miseEnValeur($numDay), 9);
+				$pdf->SetXY($posX+4.5,$posY-3.8);
 				$pdf->Cell(40,4.5,$day, $borderC, 0, 'L', 0, '', 1, false, '', 'T');
 				
 				/**
@@ -291,7 +309,7 @@ function afficheIndicateur($posX,$posY,$numDay,$pdf){
 					}
 				}
 				/**
-				 * Affiche le picto à côté de la date
+				 * Fin affiche le picto à côté de la date
 				 */
 			
 		}
@@ -303,7 +321,7 @@ afficheIndicateur(1,10,1,$pdf);
 afficheIndicateur(1,21,2,$pdf);
 afficheIndicateur(1,32,3,$pdf);
 // close and output PDF document
-$pdf->Output('ProductionPdf/Infog_.pdf','F');
+$pdf->Output('ProductionPdf/Infog_'.$date.'.pdf','F');
 
 //============================================================+
 // END OF FILE
