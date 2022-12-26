@@ -90,74 +90,126 @@ $pdf->AddPage();
 $border=0;
 // writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
 // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
-function remplaceLegend($x) {
-	if ($x == '0') {
-		$x = '0h';
-		return $x;
-	}
-	if ($x == '4') {
-		$x = '4h';
-		return $x;
-	}
-	if ($x == '8') {
-		$x = '8h';
-		return $x;
-	}
-	if ($x == '12') {
-		$x = '12h';
-		return $x;
-	}
-	if ($x == '16') {
-		$x = '16h';
-		return $x;
-	}
-	if ($x == '20') {
-		$x = '20h';
-		return $x;
-	}
-	if ($x == '23') {
-		$x = '23h';
-		return $x;
-	}
-	else{
-		$x = '';
-		return $x;
-	}
-};
-function posX($x) {
-	if ($x == '0h') {
-		$z = 1;
-		return $z;
-	}
-	else{
-		$z = -4;
-		return $z;
-	}
-};
+
+/**
+ * Permet d'ajouter des "h" aux heures
+ *
+ * @param [string] $x
+ * @return void
+ */
+	function remplaceLegend($x) {
+		if ($x == '0') {
+			$x = '0h';
+			return $x;
+		}
+		if ($x == '4') {
+			$x = '4h';
+			return $x;
+		}
+		if ($x == '8') {
+			$x = '8h';
+			return $x;
+		}
+		if ($x == '12') {
+			$x = '12h';
+			return $x;
+		}
+		if ($x == '16') {
+			$x = '16h';
+			return $x;
+		}
+		if ($x == '20') {
+			$x = '20h';
+			return $x;
+		}
+		if ($x == '23') {
+			$x = '23h';
+			return $x;
+		}
+		else{
+			$x = '';
+			return $x;
+		}
+	};
+
+/**
+ * Permet de déplacer une heure en x
+ *
+ * @param [$string] $x
+ * @return void
+ */
+	function posX($x) {
+		if ($x == '0h') {
+			$z = -3;
+			return $z;
+		}
+		else{
+			$z = -4;
+			return $z;
+		}
+	};
+
+	function affichDay($x,$y) {
+		if ($x == 1) {
+			$x = 'Aujourd\'hui';
+			return $x;
+		}
+		if ($x == 2) {
+			$x = 'Demain';
+			return $x;
+		}
+		if ($x == 3) {
+			$x = $y;
+			return $x;
+		}
+	};
+
 // $fontname = TCPDF_FONTS::addTTFfont('/TCPDF-master/fonts/ArialNarrowItalic.ttf', 'TrueTypeUnicode', '', 96);
 // $pdf->SetFont($fontname, '', 14, '', false);
-$border_style = array('all' => array('width' => 0, 'cap' => 'square', 'join' => 'miter', 'dash' => 0, 'phase' => 0));	
+$border_style = array('all' => array('width' => 0.25, 'cap' => 'square', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0, 0)));	
+
 $width = 1.9;
 $height = 4;
-$posY = 30;
+$posY = 10;
 
 $font_C = 'ariali';
 $fontSize_C = 7;
 
+$numDay = 3;
+setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
 for ($i=0; $i < count($obj->signals); $i++) { 
-	if ($i == 2) {
-		echo $obj->signals[$i]->jour."</br>";
+	if ($i == $numDay) {
+		// echo ucfirst(strftime('%A',strtotime($obj->signals[$i]->jour)))."</br>";
+		echo date("l")."</br>";
 		echo $obj->signals[$i]->message."</br>";
         echo count($obj->signals[$i]->values)."</br>";
-        for ($n=0; $n < count($obj->signals[$i]->values); $n++) { 
-			$pdf->SetFillColor(25.78, 100, 67.19, 25);
+		$border = 1;
+		$time = affichDay($numDay,ucfirst(strftime('%A',strtotime($obj->signals[$i]->jour))));
+		echo $time.'</br>';
+		$pdf->SetTextColor(0,0,0,100);
+			// $pdf->setCellPaddings(0,0,0,0);
+			$pdf->SetFont('arial','', 9);
+			$pdf->SetXY(-46.5,$posY-5);
+			$pdf->SetFillColor(0, 0, 0, 20);
+			$pdf->Cell(46.5,4.9,$time,  $border, 0, 'L', 1, '', 1, false, '', 'T');
+       
+		for ($n=0; $n < count($obj->signals[$i]->values); $n++) { 
+			if ($obj->signals[$i]->values[$n]->hvalue == 1) {
+				$pdf->SetFillColor(70, 0, 100, 0);
+			}
+			if ($obj->signals[$i]->values[$n]->hvalue == 2) {
+				$pdf->SetFillColor(0, 40, 100, 0);
+			}
+			if ($obj->signals[$i]->values[$n]->hvalue == 3) {
+				$pdf->SetFillColor(0, 100, 100, 0);
+			}
 			$pdf->Rect(0.4+($n*$width), $posY, $width, $height,'DF',$border_style);
 			
 			$html = '<span style="letter-spacing:-0.5;">'.remplaceLegend($obj->signals[$i]->values[$n]->pas).'</span>';
 			// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 			$pdf->SetFont($font_C,'L',$fontSize_C);
 			$pdf->SetTextColor(0,0,0,100);
-			$pdf->writeHTMLCell(10, 0, posX($n*$width), $posY+4, $html, 0, 1, 0, true, 'C', false);
+			$pdf->writeHTMLCell(10, 0, ($n*$width)+posX($n*$width), $posY+4, $html, 0, 1, 0, true, 'C', false);
         }
     }
 }
