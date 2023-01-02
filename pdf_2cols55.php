@@ -321,7 +321,7 @@ afficheIndicateur(1,10,1,$pdf);
 afficheIndicateur(1,21,2,$pdf);
 afficheIndicateur(1,32,3,$pdf);
 // close and output PDF document
-$pdf->Output('ProductionPdf/Infog_'.$date.'.pdf','F');
+$pdf->Output('ProductionPdf/Infog_EcoWatt_'.$date.'.pdf','F');
 
 //============================================================+
 // END OF FILE
