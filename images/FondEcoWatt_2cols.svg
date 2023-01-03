@@ -752,7 +752,7 @@
 	<rect x="0.708661" y="120.413483" fill="#D9D9D9" width="130.393707" height="34.402931"/>
 	<g>
 		<text transform="matrix(1 0 0 1 160.556168 42.150063)" font-family="'ArialMT'" font-size="9px" fill="cmyk(0%, 0%, 0%, 100%)" letter-spacing="-0.3">
-			<tspan x="-3" y="0"  font-weight="bold">EcoWatt</tspan><tspan>, porté par </tspan><tspan font-weight="bold">RTEE</tspan>
+			<tspan x="-3" y="0"  font-weight="bold">EcoWatt</tspan><tspan>, porté par </tspan><tspan font-weight="bold">RTE</tspan>
 			<tspan x="-19.106934" y="10">et </tspan><tspan font-weight="bold">l&apos;Ademe</tspan><tspan>, qualifie en temps réel</tspan>
 			<tspan x="-14.737305" y="20">le niveau d’électricité disponible</tspan><tspan x="-7.816406" y="30">en France. À chaque instant,</tspan>
 			<tspan x="-19.412598" y="40">des signaux de couleur vous aident</tspan>
